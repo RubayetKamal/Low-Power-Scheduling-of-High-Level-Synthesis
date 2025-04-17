@@ -23,7 +23,7 @@ jobs:
           latexmk_shell_escape: true
 
       - name: Upload compiled PDF
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: main-pdf
           path: main.pdf
