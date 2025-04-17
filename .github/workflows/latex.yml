@@ -27,3 +27,18 @@ jobs:
         with:
           name: main-pdf
           path: main.pdf
+
+      - name: Move compiled PDF to folder
+        run: |
+          mkdir -p compiled_pdfs
+          mv main.pdf compiled_pdfs/main.pdf
+          
+      - name: Commit compiled PDF back to repository
+        uses: EndBug/add-and-commit@v9
+        with:
+          author_name: "GitHub Actions"
+          author_email: "actions@github.com"
+          message: "Add compiled PDF"
+          add: "compiled_pdfs/main.pdf"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
