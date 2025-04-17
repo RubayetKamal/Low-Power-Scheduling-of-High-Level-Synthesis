@@ -1,0 +1,26 @@
+name: Build LaTeX document
+
+on:
+  push:
+    paths:
+      - '**.tex'
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up LaTeX
+        uses: dante-ev/latex-action@v2
+        with:
+          root_file: main.tex  # Replace with your .tex file if it's not main.tex
+
+      - name: Upload PDF
+        uses: actions/upload-artifact@v3
+        with:
+          name: compiled-pdf
+          path: ./main.pdf  # Again, match your .tex file name
