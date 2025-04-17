@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - '**.tex'
+      - '**.bib'
   workflow_dispatch:
 
 jobs:
@@ -14,13 +15,15 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up LaTeX
+      - name: Compile LaTeX document
         uses: dante-ev/latex-action@v2
         with:
-          root_file: main.tex  # Replace with your .tex file if it's not main.tex
+          root_file: main.tex
+          latexmk_use_lualatex: false
+          latexmk_shell_escape: true
 
-      - name: Upload PDF
+      - name: Upload compiled PDF
         uses: actions/upload-artifact@v3
         with:
-          name: compiled-pdf
-          path: ./main.pdf  # Again, match your .tex file name
+          name: main-pdf
+          path: main.pdf
